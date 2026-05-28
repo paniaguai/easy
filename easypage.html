@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EasyPage — Landing Pages, Made Easy.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #2A9D6A;
+    --green-light: #E8F8F0;
+    --green-mid: #1E7A50;
+    --green-dark: #144D34;
+    --ink: #0F1C15;
+    --ink-mid: #2D3D34;
+    --muted: #6B7D73;
+    --subtle: #A8BAB1;
+    --surface: #F5FAF7;
+    --white: #FFFFFF;
+    --border: rgba(42,157,106,0.15);
+    --shadow: 0 4px 32px rgba(15,28,21,0.08);
+    --radius: 16px;
+    --radius-sm: 10px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--ink);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+    height: 68px;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    color: var(--ink);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .logo-dot { color: var(--green); }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--ink-mid);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--green); }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0.6rem 1.4rem;
+    border-radius: 100px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 2px solid transparent;
+  }
+
+  .btn-primary {
+    background: var(--green);
+    color: var(--white);
+    border-color: var(--green);
+  }
+
+  .btn-primary:hover {
+    background: var(--green-mid);
+    border-color: var(--green-mid);
+    transform: translateY(-1px);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--ink);
+    border-color: rgba(15,28,21,0.2);
+  }
+
+  .btn-outline:hover {
+    border-color: var(--green);
+    color: var(--green);
+  }
+
+  .btn-lg {
+    padding: 0.85rem 2rem;
+    font-size: 1rem;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 5% 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 50% -10%, rgba(42,157,106,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 85% 60%, rgba(42,157,106,0.06) 0%, transparent 60%);
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--green-light);
+    color: var(--green-mid);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 5px 14px;
+    border-radius: 100px;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    line-height: 1.08;
+    color: var(--ink);
+    max-width: 820px;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--green);
+  }
+
+  .hero-sub {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--muted);
+    max-width: 560px;
+    margin-bottom: 2.5rem;
+    font-weight: 400;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 4rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    color: var(--ink);
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 0.82rem;
+    color: var(--subtle);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── SECTION COMMONS ── */
+  section { padding: 96px 5%; }
+
+  .section-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+
+  .section-sub {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 540px;
+    line-height: 1.7;
+  }
+
+  .text-center { text-align: center; }
+  .mx-auto { margin-left: auto; margin-right: auto; }
+
+  /* ── PROBLEM ── */
+  .problem {
+    background: var(--ink);
+    color: var(--white);
+  }
+
+  .problem .section-tag { color: #7CE9B2; }
+  .problem .section-title { color: var(--white); }
+  .problem .section-sub { color: rgba(255,255,255,0.55); max-width: 600px; }
+
+  .problem-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5px;
+    margin-top: 3.5rem;
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: rgba(255,255,255,0.08);
+  }
+
+  .problem-item {
+    background: var(--ink);
+    padding: 2rem 1.75rem;
+    transition: background 0.3s;
+  }
+
+  .problem-item:hover { background: rgba(255,255,255,0.04); }
+
+  .problem-icon {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .problem-item h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+
+  .problem-item p {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.6;
+  }
+
+  .problem-result {
+    margin-top: 3rem;
+    padding: 1.75rem 2rem;
+    background: rgba(42,157,106,0.12);
+    border: 1px solid rgba(42,157,106,0.25);
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .problem-result-icon { font-size: 1.5rem; }
+
+  .problem-result p {
+    color: rgba(255,255,255,0.8);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .problem-result strong { color: #7CE9B2; }
+
+  /* ── HOW IT WORKS ── */
+  .how { background: var(--surface); }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0;
+    margin-top: 3.5rem;
+    position: relative;
+  }
+
+  .step {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 2rem;
+    position: relative;
+  }
+
+  .step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 2.8rem;
+    right: -1px;
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--green), transparent);
+  }
+
+  .step-num {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--green);
+    color: var(--white);
+    font-weight: 700;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+    flex-shrink: 0;
+  }
+
+  .step h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+
+  .step p {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ── PRICING ── */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3.5rem;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .pricing-card {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem 1.75rem;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s, box-shadow 0.25s;
+    position: relative;
+  }
+
+  .pricing-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+  }
+
+  .pricing-card.featured {
+    border-color: var(--green);
+    border-width: 2px;
+  }
+
+  .featured-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--green);
+    color: var(--white);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+
+  .tier-name {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--green);
+    margin-bottom: 0.5rem;
+  }
+
+  .tier-price {
+    font-family: 'DM Serif Display', serif;
+    font-size: 3rem;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+
+  .tier-price span {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--muted);
+  }
+
+  .tier-delivery {
+    font-size: 0.82rem;
+    color: var(--subtle);
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+  }
+
+  .tier-divider {
+    height: 1px;
+    background: var(--border);
+    margin-bottom: 1.5rem;
+  }
+
+  .tier-features {
+    list-style: none;
+    flex: 1;
+    margin-bottom: 2rem;
+  }
+
+  .tier-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 0.88rem;
+    color: var(--ink-mid);
+    padding: 0.35rem 0;
+  }
+
+  .check {
+    color: var(--green);
+    font-size: 1rem;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* Monthly care card */
+  .care-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem 2.5rem;
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .care-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--subtle);
+    margin-bottom: 0.25rem;
+  }
+
+  .care-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .care-price {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem;
+    color: var(--ink);
+  }
+
+  .care-features {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .care-feature {
+    font-size: 0.85rem;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  /* ── ADDONS ── */
+  .addons-section {
+    margin-top: 3rem;
+    text-align: center;
+  }
+
+  .addons-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--subtle);
+    margin-bottom: 1rem;
+  }
+
+  .addons-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+
+  .pill {
+    background: var(--green-light);
+    color: var(--green-mid);
+    font-size: 0.82rem;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 100px;
+  }
+
+  /* ── TARGET ── */
+  .target { background: var(--surface); }
+
+  .target-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+
+  .target-card {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 1.5rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    transition: all 0.2s;
+  }
+
+  .target-card:hover {
+    border-color: var(--green);
+    transform: translateY(-2px);
+  }
+
+  .target-icon {
+    font-size: 1.6rem;
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    background: var(--green-light);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .target-card h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.25rem;
+  }
+
+  .target-card p {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* ── WHY US ── */
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    margin-top: 3rem;
+  }
+
+  .why-list { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .why-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .why-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-sm);
+    background: var(--green-light);
+    color: var(--green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .why-item h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+  }
+
+  .why-item p {
+    font-size: 0.87rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .why-visual {
+    background: linear-gradient(135deg, var(--green-light) 0%, #D4F0E4 100%);
+    border-radius: var(--radius);
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .why-visual::before {
+    content: '';
+    position: absolute;
+    top: -30px;
+    right: -30px;
+    width: 120px;
+    height: 120px;
+    background: rgba(42,157,106,0.2);
+    border-radius: 50%;
+  }
+
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+
+  .comparison-table th {
+    padding: 0.6rem 0.75rem;
+    text-align: left;
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    border-bottom: 1px solid rgba(42,157,106,0.2);
+  }
+
+  .comparison-table td {
+    padding: 0.65rem 0.75rem;
+    color: var(--ink-mid);
+    border-bottom: 1px solid rgba(42,157,106,0.1);
+  }
+
+  .comparison-table tr:last-child td { border-bottom: none; }
+
+  .vs-us { color: var(--green); font-weight: 600; }
+  .vs-them { color: var(--muted); }
+
+  /* ── CTA ── */
+  .cta-section {
+    background: var(--ink);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 50% 110%, rgba(42,157,106,0.2) 0%, transparent 70%);
+  }
+
+  .cta-section .section-title { color: var(--white); }
+  .cta-section .section-sub { color: rgba(255,255,255,0.55); margin: 1rem auto 2.5rem; }
+
+  .cta-trust {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+  }
+
+  .trust-item {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.45);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .trust-check { color: #7CE9B2; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    border-top: 1px solid rgba(255,255,255,0.07);
+    padding: 2.5rem 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.3rem;
+    color: var(--white);
+    text-decoration: none;
+  }
+
+  .footer-copy {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.3);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.4);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: rgba(255,255,255,0.8); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+
+    .hero h1 { font-size: 2.6rem; }
+
+    .why-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-stats { gap: 2rem; }
+
+    section { padding: 64px 5%; }
+
+    .care-card { flex-direction: column; }
+
+    .step:not(:last-child)::after { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="#" class="logo">Easy<span class="logo-dot">Page</span></a>
+  <ul class="nav-links">
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#who">Who it's for</a></li>
+    <li><a href="#why">Why us</a></li>
+    <li><a href="#start" class="btn btn-primary" style="padding: 0.45rem 1.1rem; font-size:0.85rem;">Get started →</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-badge">✦ Launching Q3 2026</div>
+  <h1>Landing pages,<br><em>made easy.</em></h1>
+  <p class="hero-sub">AI-powered landing pages for small businesses and solopreneurs — clean, fast, and ready in 24–48 hours. Starting at just $99.</p>
+  <div class="hero-cta">
+    <a href="#start" class="btn btn-primary btn-lg">Get your page →</a>
+    <a href="#pricing" class="btn btn-outline btn-lg">See pricing</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-num">24h</span>
+      <span class="stat-label">Delivery</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">$99</span>
+      <span class="stat-label">Starting price</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">100%</span>
+      <span class="stat-label">Mobile-ready</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">5 min</span>
+      <span class="stat-label">Brief form</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROBLEM ── -->
+<section class="problem" id="problem">
+  <div class="reveal">
+    <div class="section-tag">The problem</div>
+    <h2 class="section-title">Most small businesses are stuck.</h2>
+    <p class="section-sub">Getting online shouldn't cost thousands or take months. Yet that's exactly what most businesses face.</p>
+  </div>
+  <div class="problem-grid reveal" style="transition-delay: 0.1s;">
+    <div class="problem-item">
+      <div class="problem-icon">💸</div>
+      <h3>Insane costs</h3>
+      <p>Agencies charge $1,000–$5,000+ for basic sites. Way out of reach for most small businesses.</p>
+    </div>
+    <div class="problem-item">
+      <div class="problem-icon">⏳</div>
+      <h3>Endless waiting</h3>
+      <p>Traditional design projects drag on for weeks or months before anything goes live.</p>
+    </div>
+    <div class="problem-item">
+      <div class="problem-icon">🤯</div>
+      <h3>Tool overwhelm</h3>
+      <p>Wix, Squarespace, WordPress — too complex, too much choice, too much time wasted.</p>
+    </div>
+    <div class="problem-item">
+      <div class="problem-icon">📉</div>
+      <h3>Poor DIY results</h3>
+      <p>Self-built pages look amateur and don't convert. A bad page can hurt more than none at all.</p>
+    </div>
+  </div>
+  <div class="problem-result reveal" style="transition-delay: 0.2s;">
+    <div class="problem-result-icon">⚠️</div>
+    <p><strong>The result:</strong> Millions of small businesses remain invisible online — or lose customers daily to competitors with better-looking pages. It doesn't have to be this way.</p>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="how" id="how">
+  <div class="text-center reveal">
+    <div class="section-tag">How it works</div>
+    <h2 class="section-title">From brief to live page in 48 hours.</h2>
+    <p class="section-sub mx-auto">Five simple steps. No technical knowledge needed. We handle everything from design to delivery.</p>
+  </div>
+  <div class="steps reveal" style="transition-delay: 0.15s;">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3>Fill the brief</h3>
+      <p>Complete a 5-minute form about your business, goals, and style preferences.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3>AI generation</h3>
+      <p>We use advanced AI tools to rapidly build the core structure and copy of your page.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3>Human refinement</h3>
+      <p>Our team polishes copy, selects images, and ensures branding is on point.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <h3>You review</h3>
+      <p>We deliver a live preview link. Request any tweaks within your revision allowance.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <h3>Goes live ✦</h3>
+      <p>Receive full HTML files + optional publishing to Netlify, Vercel, or your own domain.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRICING ── -->
+<section id="pricing">
+  <div class="text-center reveal">
+    <div class="section-tag">Pricing</div>
+    <h2 class="section-title">Simple, transparent pricing.</h2>
+    <p class="section-sub mx-auto">No hidden fees, no retainers, no surprises. Pay once, get your page. It's that easy.</p>
+  </div>
+
+  <div class="pricing-grid reveal" style="transition-delay: 0.1s;">
+
+    <!-- Starter -->
+    <div class="pricing-card">
+      <div class="tier-name">Starter</div>
+      <div class="tier-price">$99</div>
+      <div class="tier-delivery">⚡ Ready in 48 hours</div>
+      <div class="tier-divider"></div>
+      <ul class="tier-features">
+        <li><span class="check">✓</span> Clean one-page landing</li>
+        <li><span class="check">✓</span> Mobile-friendly design</li>
+        <li><span class="check">✓</span> Contact / call-to-action section</li>
+        <li><span class="check">✓</span> Full HTML file delivery</li>
+        <li><span class="check">✓</span> 1 revision included</li>
+      </ul>
+      <a href="#start" class="btn btn-outline" style="text-align:center; justify-content:center;">Get Starter →</a>
+    </div>
+
+    <!-- Pro -->
+    <div class="pricing-card featured">
+      <div class="featured-badge">Most popular</div>
+      <div class="tier-name">Pro</div>
+      <div class="tier-price">$249</div>
+      <div class="tier-delivery">🚀 Ready in 24–36 hours</div>
+      <div class="tier-divider"></div>
+      <ul class="tier-features">
+        <li><span class="check">✓</span> Polished, professional design</li>
+        <li><span class="check">✓</span> Custom curated images</li>
+        <li><span class="check">✓</span> Lead capture form</li>
+        <li><span class="check">✓</span> SEO basics included</li>
+        <li><span class="check">✓</span> 2 revisions included</li>
+        <li><span class="check">✓</span> Copy optimization</li>
+      </ul>
+      <a href="#start" class="btn btn-primary" style="text-align:center; justify-content:center;">Get Pro →</a>
+    </div>
+
+    <!-- Premium -->
+    <div class="pricing-card">
+      <div class="tier-name">Premium</div>
+      <div class="tier-price">$399</div>
+      <div class="tier-delivery">⚡ Ready in 48 hours</div>
+      <div class="tier-divider"></div>
+      <ul class="tier-features">
+        <li><span class="check">✓</span> Multi-section / multi-page site</li>
+        <li><span class="check">✓</span> Basic analytics setup</li>
+        <li><span class="check">✓</span> Hosting setup included</li>
+        <li><span class="check">✓</span> Custom domain connection</li>
+        <li><span class="check">✓</span> 3 revisions included</li>
+        <li><span class="check">✓</span> Priority support</li>
+      </ul>
+      <a href="#start" class="btn btn-outline" style="text-align:center; justify-content:center;">Get Premium →</a>
+    </div>
+  </div>
+
+  <!-- Monthly Care -->
+  <div class="care-card reveal" style="transition-delay:0.2s;">
+    <div>
+      <div class="care-label">Optional add-on</div>
+      <div class="care-title">Monthly Care Plan</div>
+      <div class="care-features" style="margin-top: 0.5rem;">
+        <span class="care-feature"><span style="color:var(--green)">✓</span> Content updates</span>
+        <span class="care-feature"><span style="color:var(--green)">✓</span> Hosting management</span>
+        <span class="care-feature"><span style="color:var(--green)">✓</span> Performance monitoring</span>
+        <span class="care-feature"><span style="color:var(--green)">✓</span> Ongoing support</span>
+      </div>
+    </div>
+    <div style="text-align:right; flex-shrink:0;">
+      <div class="care-price">$29–$49<span style="font-family:'DM Sans',sans-serif; font-size:1rem; color:var(--muted); font-weight:400;">/mo</span></div>
+      <a href="#start" class="btn btn-outline" style="margin-top:0.75rem;">Add monthly care</a>
+    </div>
+  </div>
+
+  <!-- Add-ons -->
+  <div class="addons-section reveal" style="transition-delay:0.3s;">
+    <div class="addons-label">Available add-ons</div>
+    <div class="addons-pills">
+      <span class="pill">Custom domain setup</span>
+      <span class="pill">Google Analytics</span>
+      <span class="pill">Lead form integrations</span>
+      <span class="pill">Professional copywriting</span>
+      <span class="pill">Extra revisions</span>
+      <span class="pill">Speed optimization</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHO IT'S FOR ── -->
+<section class="target" id="who">
+  <div class="text-center reveal">
+    <div class="section-tag">Who it's for</div>
+    <h2 class="section-title">Built for real small businesses.</h2>
+    <p class="section-sub mx-auto">If you need an effective online presence without the complexity and cost — EasyPage is made for you.</p>
+  </div>
+  <div class="target-grid reveal" style="transition-delay:0.1s;">
+    <div class="target-card">
+      <div class="target-icon">🔧</div>
+      <div>
+        <h3>Local service businesses</h3>
+        <p>Plumbers, electricians, salons, cleaners, mechanics — get found locally.</p>
+      </div>
+    </div>
+    <div class="target-card">
+      <div class="target-icon">💼</div>
+      <div>
+        <h3>Solopreneurs & consultants</h3>
+        <p>Coaches, consultants, tutors, and freelancers who need a professional presence.</p>
+      </div>
+    </div>
+    <div class="target-card">
+      <div class="target-icon">📸</div>
+      <div>
+        <h3>Photographers & creatives</h3>
+        <p>Show your work beautifully. A portfolio page that attracts clients.</p>
+      </div>
+    </div>
+    <div class="target-card">
+      <div class="target-icon">🛍️</div>
+      <div>
+        <h3>Side hustlers & e-commerce</h3>
+        <p>Small sellers who need a clean product or sales page without a big investment.</p>
+      </div>
+    </div>
+    <div class="target-card">
+      <div class="target-icon">🎪</div>
+      <div>
+        <h3>Event organizers</h3>
+        <p>Campaign pages, RSVP pages, and lead capture — fast and affordable.</p>
+      </div>
+    </div>
+    <div class="target-card">
+      <div class="target-icon">🌱</div>
+      <div>
+        <h3>New businesses launching</h3>
+        <p>Start strong with a professional page before you've even got your first customer.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHY US ── -->
+<section id="why">
+  <div class="reveal">
+    <div class="section-tag">Why EasyPage</div>
+    <h2 class="section-title">The smart alternative.</h2>
+  </div>
+  <div class="why-grid">
+    <div class="why-list reveal" style="transition-delay:0.05s;">
+      <div class="why-item">
+        <div class="why-icon">⚡</div>
+        <div>
+          <h3>Speed without sacrificing quality</h3>
+          <p>AI handles the heavy lifting, humans handle the nuance. You get fast delivery and professional results — not a template you could've done yourself.</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-icon">💰</div>
+        <div>
+          <h3>A fraction of agency prices</h3>
+          <p>We've optimised our process so we can charge $99–$399 for work that agencies bill thousands for. Same quality, radically different price.</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-icon">🎯</div>
+        <div>
+          <h3>Goal-focused, no bloat</h3>
+          <p>Every page is built around one objective — get leads, make sales, or grow your audience. No unnecessary features, no slow load times.</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-icon">📱</div>
+        <div>
+          <h3>Mobile-first as standard</h3>
+          <p>Every page is fully responsive. Your customers browse on phones — your page will look perfect on every screen size, guaranteed.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="why-visual reveal" style="transition-delay:0.15s;">
+      <p style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--green-mid); margin-bottom: 1rem;">EasyPage vs. the alternatives</p>
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th style="color: var(--green-mid);">EasyPage</th>
+            <th>Agency</th>
+            <th>DIY tools</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="color:var(--ink-mid); font-weight:500;">Price</td>
+            <td class="vs-us">$99–$399</td>
+            <td class="vs-them">$1k–$5k+</td>
+            <td class="vs-them">$0 + time</td>
+          </tr>
+          <tr>
+            <td style="color:var(--ink-mid); font-weight:500;">Delivery</td>
+            <td class="vs-us">24–48 hrs</td>
+            <td class="vs-them">2–8 weeks</td>
+            <td class="vs-them">Days to never</td>
+          </tr>
+          <tr>
+            <td style="color:var(--ink-mid); font-weight:500;">Quality</td>
+            <td class="vs-us">Professional</td>
+            <td class="vs-them">Professional</td>
+            <td class="vs-them">Varies</td>
+          </tr>
+          <tr>
+            <td style="color:var(--ink-mid); font-weight:500;">Effort needed</td>
+            <td class="vs-us">5 min brief</td>
+            <td class="vs-them">Many meetings</td>
+            <td class="vs-them">Hours of work</td>
+          </tr>
+          <tr>
+            <td style="color:var(--ink-mid); font-weight:500;">Conversion-focused</td>
+            <td class="vs-us">Always</td>
+            <td class="vs-them">Sometimes</td>
+            <td class="vs-them">Rarely</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta-section" id="start">
+  <div class="cta-bg"></div>
+  <div style="position:relative; z-index:1;">
+    <div class="reveal">
+      <div class="section-tag" style="color: #7CE9B2;">Ready when you are</div>
+      <h2 class="section-title">Get your page in 48 hours.</h2>
+      <p class="section-sub">Fill in our 5-minute brief and we'll get started right away. No contract, no commitment — just a professional page that works.</p>
+      <a href="#" class="btn btn-primary btn-lg" style="font-size: 1.05rem; padding: 1rem 2.5rem;">Start your brief →</a>
+    </div>
+    <div class="cta-trust reveal" style="transition-delay:0.1s;">
+      <span class="trust-item"><span class="trust-check">✓</span> No contract required</span>
+      <span class="trust-item"><span class="trust-check">✓</span> Satisfaction guaranteed</span>
+      <span class="trust-item"><span class="trust-check">✓</span> Full file ownership</span>
+      <span class="trust-item"><span class="trust-check">✓</span> Cancel anytime (monthly plan)</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <a href="#" class="footer-logo">EasyPage</a>
+  <p class="footer-copy">© 2026 EasyPage. Landing pages, made easy.</p>
+  <ul class="footer-links">
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#start">Get started</a></li>
+  </ul>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+
+  // Nav shadow on scroll
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    nav.style.boxShadow = window.scrollY > 20 ? '0 2px 20px rgba(0,0,0,0.06)' : 'none';
+  });
+</script>
+
+</body>
+</html>
